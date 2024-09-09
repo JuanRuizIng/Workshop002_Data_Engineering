@@ -1,0 +1,2 @@
+# Workshop002_Data_Engineering
+ This workshop is an exercise on how to build an ETL pipeline using Apache Airflow, the idea is to extract information using three different data sources (API, csv file, database), then do some transformations and merge the transformed data to finally load into google drive as a CSV file and store the data in a DB. As a last step, create a dashboard from the data stored in the DB to visualize the information
