@@ -55,4 +55,4 @@ def music_etl_analysis():
     merge_data = merge_task(transformed_data_spotify, transformed_data_grammys)
     load_task(merge_data)
 
-workflow_api_etl_dag = music_etl_analysis()
+workflow_music_etl_analysis = music_etl_analysis()
