@@ -22,7 +22,7 @@ default_args = {
     description='Grammys and Spotify ETL Process',
     schedule_interval='@daily',  # Set the schedule interval as per your requirements
 )
-def api_etl_project():
+def music_etl_analysis():
 
     @task
     def extract_task_csv ():
@@ -55,4 +55,4 @@ def api_etl_project():
     merge_data = merge_task(transformed_data_spotify, transformed_data_grammys)
     load_task(merge_data)
 
-workflow_api_etl_dag = api_etl_project()
+workflow_api_etl_dag = music_etl_analysis()
