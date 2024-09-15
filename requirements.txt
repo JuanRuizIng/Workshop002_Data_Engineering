@@ -1,8 +1,11 @@
-pandas
+apache-airflow==2.10.1 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.1/constraints-3.8.txt"
+pandas==2.1.4
 matplotlib
-sqlalchemy
+sqlalchemy==1.4.54
 psycopg2-binary
 python-dotenv
 seaborn
 sqlalchemy-utils
 notebook
+google-api-python-client
+google-auth

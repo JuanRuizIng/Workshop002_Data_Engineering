@@ -1,11 +1,18 @@
 import pandas as pd
+import logging
+
 
 def transform_grammys(data):
     """Defines the columns database data 'Grammy' dataset to be used in the analysis."""
-    columns_map = ['category', 'nominee', 'winner']
-    data = data[columns_map]
-    data = data.dropna()
+    try:
+        columns_map = ['category', 'nominee', 'winner']
+        data = data[columns_map]
+        data = data.dropna()
+    except Exception as e:
+        logging.error(f'Error: {str(e)}')
+    
     return data
+
 
 def transform_spotify(data):
     """Defines the columns csv data 'Spotify' dataset to be used in the analysis."""
@@ -145,21 +152,24 @@ def transform_spotify(data):
         "k-pop":"Oriental Music",
         "indian":"Oriental Music",
     }
+    try:
+        data = data[columns_map]
+        data['duration_min'] = round(data['duration_ms'] / 60000, 2)
+        data = data.drop(columns=['duration_ms'])
+        data['track_genre_grouped'] = data['track_genre'].replace(genere_map)
+        data['duration_grouped'] = pd.cut(
+            x=data['duration_min'], bins=[0, 2, 3, 5, 10, 90],
+            labels=['0-2 min', '2-3 min', '3-5 min', '5-10 min', '10+ min'],
+            right=False
+        )
+        data['popularity_grouped'] = pd.cut(
+            x=data['popularity'], bins=[0, 20, 40, 60, 80, 100],
+            labels=['0-20', '20-40', '40-60', '60-80', '80-100'],
+            right=False
+        )
+        data = data[data['tempo'] != 0]
+        data = data.dropna()
+    except Exception as e:
+        logging.error(f'Error: {str(e)}')
 
-    data = data[columns_map]
-    data = data.dropna()
-    data['duration_min'] = round(data['duration_ms'] / 60000, 2)
-    data = data.drop(columns=['duration_ms'])
-    data['track_genre_grouped'] = data['track_genre'].replace(genere_map)
-    data['duration_grouped'] = pd.cut(
-        x=data['duration_min'], bins=[0, 2, 3, 5, 10, 90],
-        labels=['0-2 min', '2-3 min', '3-5 min', '5-10 min', '10+ min'],
-        right=False
-    )
-    data['popularity_grouped'] = pd.cut(
-        x=data['popularity'], bins=[0, 20, 40, 60, 80, 100],
-        labels=['0-20', '20-40', '40-60', '60-80', '80-100'],
-        right=False
-    )
-    data = data[data['tempo'] != 0]
     return data

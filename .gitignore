@@ -1,4 +1,7 @@
 venv
 *.csv
-auth
+.env
+*..json
 __pycache__
+airflow
+logs

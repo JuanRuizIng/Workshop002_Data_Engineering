@@ -1,29 +1,22 @@
+from sqlalchemy import create_engine, Integer, Float, String, DateTime, inspect, MetaData, Table, Column, Boolean
+from sqlalchemy_utils import database_exists, create_database
 import os
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, Integer, Float, String, DateTime, inspect, MetaData, Table, Column, BIGINT
-from sqlalchemy_utils import database_exists, create_database
 
+load_dotenv('src/auth/.env')
 
-# Reading the environment variables
-load_dotenv("./src/auth/.env")
+host = os.getenv('PG_HOST')
+port = os.getenv('PG_PORT')
+user = os.getenv('PG_USER')
+password = os.getenv('PG_PASSWORD')
+database = os.getenv('PG_DATABASE')
 
-user = os.getenv("PG_USER")
-password = os.getenv("PG_PASSWORD")
-
-host = os.getenv("PG_HOST")
-port = os.getenv("PG_PORT")
-
-database = os.getenv("PG_DATABASE")
 
 
 # Creating the connection engine from the URL made up of the environment variables
 def creating_engine():
     url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
     engine = create_engine(url)
-    
-    if not database_exists(engine.url):
-        create_database(engine.url)
-    
     return engine
 
 
@@ -38,6 +31,8 @@ def infer_sqlalchemy_type(dtype, column_name):
         return String(500)
     elif "datetime" in dtype.name:
         return DateTime
+    elif "bool" in dtype.name:
+        return Boolean
     else:
         return String(500)
 
@@ -51,6 +46,6 @@ def create_table(engine, df, table_name):
         table = Table(table_name, metadata, *columns)
         table.create(engine)
 
-        df.to_sql(table_name, con=engine, if_exists='replace', index=False)
+        df.to_sql(table_name, engine, if_exists='replace', index=False)
     else:
         print(f'Table {table_name} already exists.')
