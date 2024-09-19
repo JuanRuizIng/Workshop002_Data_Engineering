@@ -167,7 +167,52 @@ def transform_spotify(data):
             labels=['0-20', '20-40', '40-60', '60-80', '80-100'],
             right=False
         )
+        data['valence_grouped'] = pd.cut(
+            x=data['valence'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['danceability_grouped'] = pd.cut(
+            x=data['danceability'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['energy_grouped'] = pd.cut(
+            x=data['energy'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['speechiness_grouped'] = pd.cut(
+            x=data['speechiness'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['loudness_grouped'] = pd.cut(
+            x=data['loudness'], bins=[-50, -40, -30, -20, -10, 0, 10],
+            labels=['-50 - -40', '-40 - -30', '-30 - -20', '-20 - -10', '-10 - 0', '0 - 10'],
+            right=False
+        )
+        data['acousticness_grouped'] = pd.cut(
+            x=data['acousticness'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['instrumentalness_grouped'] = pd.cut(
+            x=data['instrumentalness'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
+        data['liveness_grouped'] = pd.cut(
+            x=data['liveness'], bins=[0, 0.2, 0.4, 0.6, 0.8, 1],
+            labels=['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1'],
+            right=False
+        )
         data = data[data['tempo'] != 0]
+        data['tempo_grouped'] = pd.cut(
+            x=data['tempo'], bins=[30, 50, 100, 150, 200, 250],
+            labels=['30 - 50', '50 - 100', '100 - 150', '150 - 200', '200 - 250'],
+            right=False
+        )
         data = data.dropna()
     except Exception as e:
         logging.error(f'Error: {str(e)}')
