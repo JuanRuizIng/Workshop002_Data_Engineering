@@ -9,6 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.etl.transformation import transform_spotify, transform_grammys
 from src.etl.merge import merge_function
 from src.etl.load import load_function
+from src.etl.store import store_load
 
 load_dotenv('src/auth/.env')
 
@@ -103,9 +104,16 @@ def merge(json_data_spotify, json_data_grammys):
 
 def load(json_data):
     try:
-        data = pd.json_normalize(data=json_data)
-        logging.info(f"data after extract is: {data}")
-        load_function(data)
+        logging.info(f"data after extract is: {json_data}")
+        data = load_function(json_data)
     except Exception as e:
         logging.error(f'Error: {str(e)}')
-    return 'Data loaded successfully'
+    return data.to_json(orient='records')
+
+def store(json_data):
+    try:
+        logging.info(f"data after extract is: {json_data}")
+        store_load(json_data)
+    except Exception as e:
+        logging.error(f'Error: {str(e)}')
+    return 'Data stored successfully'

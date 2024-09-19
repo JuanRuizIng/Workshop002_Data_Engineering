@@ -9,3 +9,4 @@ sqlalchemy-utils
 notebook
 google-api-python-client
 google-auth
+pyarrow

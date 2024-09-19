@@ -1,7 +1,8 @@
 venv
 *.csv
 .env
-*..json
+*.json
 __pycache__
 airflow
 logs
+*.Identifier

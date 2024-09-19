@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 from airflow.decorators import dag, task
-from etl import extract_csv, extract_db, transform_db, transform_csv, merge, load_function
+from etl import extract_csv, extract_db, transform_db, transform_csv, merge, load, store
 
 
 default_args = {
@@ -46,13 +46,18 @@ def music_etl_analysis():
 
     @task
     def load_task(json_data):
-        load_function(json_data)
+        return load(json_data),
+
+    @task
+    def store_task(json_data):
+        return store(json_data)
 
     data_spotify = extract_task_csv()
     data_grammys = extract_task_db()
     transformed_data_spotify = transform_task_csv(data_spotify)
     transformed_data_grammys = transform_task_db(data_grammys)
     merge_data = merge_task(transformed_data_spotify, transformed_data_grammys)
-    load_task(merge_data)
+    data_load = load_task(merge_data)
+    store_task(data_load)
 
 workflow_music_etl_analysis = music_etl_analysis()
