@@ -5,7 +5,7 @@ import logging
 def transform_grammys(data):
     """Defines the columns database data 'Grammy' dataset to be used in the analysis."""
     try:
-        columns_map = ['category', 'nominee', 'winner']
+        columns_map = ['category', 'nominee', 'winner', 'year']
         data = data[columns_map]
         data = data.dropna()
     except Exception as e:
