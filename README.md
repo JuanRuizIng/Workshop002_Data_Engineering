@@ -4,7 +4,7 @@ Realized by **Juan Andrés Ruiz Muñoz** ([@JuanRuizIng](https://github.com/Juan
 
 ## Overview ✨
 
-In this workshop we use randomly generated data on candidates stored in a CSV. With this data we run loading, cleaning and transformation processes to find interesting insights using the following tools:
+In this workshop we use Spotify and Grammys data. With this data we run loading, cleaning and transformation processes to find interesting insights using the following tools:
 
 * Python ➜ [Download site](https://www.python.org/downloads/)
 * Jupyter Notebook ➜ [VS Code tool for using notebooks](https://youtu.be/ZYat1is07VI?si=BMHUgk7XrJQksTkt)
