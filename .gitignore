@@ -1,0 +1,8 @@
+venv
+*.csv
+.env
+*.json
+__pycache__
+airflow
+logs
+*.Identifier
