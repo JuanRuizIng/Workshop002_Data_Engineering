@@ -10,7 +10,7 @@ In this workshop we use Spotify and Grammys data. With this data we run loading,
 * Jupyter Notebook ➜ [VS Code tool for using notebooks](https://youtu.be/ZYat1is07VI?si=BMHUgk7XrJQksTkt)
 * PostgreSQL ➜ [Download site](https://www.postgresql.org/download/)
 * Power BI (Desktop version) ➜ [Download site](https://www.microsoft.com/es-es/power-platform/products/power-bi/desktop)
-* Apache Airflow [Download site](https://github.com/apache/airflow)
+* Apache Airflow ➜ [Download site](https://github.com/apache/airflow)
 
 The libraries needed for Python are
 
